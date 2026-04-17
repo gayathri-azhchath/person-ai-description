@@ -12,6 +12,5 @@ router.register(r'ai-history', AIHistoryViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('generate-description/', generate_description),
-    path('generate-ai-action/', generate_ai_action),
+    path('api/', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

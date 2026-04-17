@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const PERSON_API = "http://127.0.0.1:8000/api/persons/";
-const HISTORY_API = "http://127.0.0.1:8000/api/ai-history/";
+const PERSON_API = "http://127.0.0.1/api/persons/";
+const HISTORY_API = "http://127.0.0.1/api/ai-history/";
 
 function App() {
   const [persons, setPersons] = useState([]);
@@ -81,7 +81,7 @@ function App() {
   // AI Bio Generator
   const generateDescription = async () => {
     const res = await axios.post(
-      "http://127.0.0.1:8000/generate-description/",
+      "http://127.0.0.1/api/generate-description/",
       {
         name: formData.name,
         age: formData.age,
@@ -94,7 +94,7 @@ function App() {
   // AI Action Generator
   const generateAIAction = async () => {
     const res = await axios.post(
-      "http://127.0.0.1:8000/generate-ai-action/",
+      "http://127.0.0.1/api/generate-ai-action/",
       {
         name: formData.name,
       }
