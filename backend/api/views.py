@@ -30,19 +30,17 @@ def generate_description(request):
 
     try:
         client = ollama.Client(host=os.getenv('OLLAMA_HOST'))
+
         response = client.chat(
             model=OLLAMA_MODEL,
-            messages=[
-                {"role": "user", "content": prompt}
-            ]
+            messages=[{"role": "user", "content": prompt}]
         )
+
         description = response['message']['content']
+
     except Exception as e:
-        description = (
-            f"Bio for {name} is not available right now. "
-            f"The AI service is still starting up or the model is being downloaded. "
-            f"Please try again in a few moments. (Error: {type(e).__name__})"
-        )
+        print("Ollama error:", str(e))
+        description = f"AI unavailable. Try again later."
 
     return Response({"description": description})
 
