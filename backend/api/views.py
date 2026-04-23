@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import Person, AIHistory
 from .serializers import PersonSerializer, AIHistorySerializer
 import ollama
+import os
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -25,7 +26,8 @@ def generate_description(request):
 
     prompt = f"Write a short bio about {name}, who is {age} years old and lives in {place}."
 
-    response = ollama.chat(
+    client = ollama.Client(host=os.getenv('OLLAMA_HOST'))
+    response = client.chat(
         model='phi',
         messages=[
             {"role": "user", "content": prompt}
@@ -44,7 +46,8 @@ def generate_ai_action(request):
 
     prompt = f"Suggest a daily activity plan for a person named {name}."
 
-    response = ollama.chat(
+    client = ollama.Client(host=os.getenv('OLLAMA_HOST'))
+    response = client.chat(
         model='phi',
         messages=[
             {"role": "user", "content": prompt}
